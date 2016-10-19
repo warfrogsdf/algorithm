@@ -26,3 +26,6 @@ var traversal = function (root) {
         return res;
     }
 };
+
+
+module.exports = traversal;

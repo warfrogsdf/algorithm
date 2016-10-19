@@ -1,5 +1,5 @@
 {
-  "name": "algorithm",
+  "name": "algorithm-javascript",
   "version": "1.0.1",
   "description": "algorithm achieve by javascript",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "preOrderTraversal"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/warfrogsdf/algorithm/issues"
   },

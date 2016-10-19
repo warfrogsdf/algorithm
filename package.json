@@ -1,0 +1,27 @@
+{
+  "name": "algorithm",
+  "version": "1.0.1",
+  "description": "algorithm achieve by javascript",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/testPreOrderTraversal.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warfrogsdf/algorithm.git"
+  },
+  "keywords": [
+    "algorithm",
+    "tree",
+    "preOrderTraversal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warfrogsdf/algorithm/issues"
+  },
+  "homepage": "https://github.com/warfrogsdf/algorithm#readme"
+}

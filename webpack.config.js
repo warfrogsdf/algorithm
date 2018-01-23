@@ -1,9 +1,8 @@
 /**
  * Created by LI on 2017/2/2.
  */
-//一个常见的Webpack配置文件
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: __dirname + "/src/main.js",
@@ -16,25 +15,13 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.json$/,
-                loader: "json"
-            },
-            {
-                test: /\.css$/,
-                loader: "style!css"
-            },
-            {
-                test: /\.js[x]?$/,
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
                     plugins: ['babel-plugin-transform-decorators-legacy', 'syntax-class-properties'],
-                    presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-3', 'stage-2', 'stage-1', 'stage-0']
+                    presets: ['es2015', 'stage-2']
                 }
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                loader: 'file'
             }
         ]
     },

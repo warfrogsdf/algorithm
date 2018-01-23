@@ -4,7 +4,7 @@
   "description": "algorithm achieve by javascript",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "jest"
   },
   "scripts": {
     "test": "node ./test/testPreOrderTraversal.js"
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/warfrogsdf/algorithm/issues"
   },
-  "homepage": "https://github.com/warfrogsdf/algorithm#readme"
+  "homepage": "https://github.com/warfrogsdf/algorithm#readme",
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
 }

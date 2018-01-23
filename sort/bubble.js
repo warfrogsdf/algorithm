@@ -1,32 +1,37 @@
 /**
  * Created by lib7311 on 2016/10/24.
- * 冒泡排序-稳定
+ * stable sorting
  */
 
 /**
- * 使用传入的迭代器，对数组进行冒泡排序
- * @param array
- * @param iterator
+ * bubble sorting
+ * arr.sort([compareFunction])
+ * @param {function} compareFunction - Specifies a function that defines the sort order
+ * @result {array} arr - The sorted array
  */
-var Bubble = function (array, iterator) {
-    var hasOrder = false, //false表示还处于无序,需要继续迭代; true表示有序
-        i = array.length - 1,
-        j,
-        temp;
-    for (; i > 0 && !hasOrder; --i) {
-        //每次循环开始认为是有序的
-        hasOrder = true;
-        for (j = 0; j < i; ++j) {
-            if(array[j] > array[j + 1]){
-                //当
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-                hasOrder = false;
-            }
-        }
-    }
-    return array;
-};
+export default function Bubble(compareFunction) {
+  let arr = this,
+    ordered = false, //false表示还处于无序,需要继续迭代; true表示有序
+    i = arr.length - 1,
+    j,
+    tempItem,
+    temp;
+  for (; i > 0 && !ordered; --i) {
+    //每次循环开始认为是有序的
+    ordered = true;
+    for (j = 0; j < i; ++j) {
+      temp = compareFunction(arr[j], arr[j+1]);
+      if (temp > 0) {
+        tempItem = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = tempItem;
+        ordered = false;
+      }else if(temp > 0){
 
-module.exports = Bubble;
+      }else{
+
+      }
+    }
+  }
+  return arr;
+};

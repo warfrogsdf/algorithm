@@ -5,11 +5,12 @@
 
 /**
  * bubble sorting
- * arr.sort([compareFunction])
- * @param {function} compareFunction - Specifies a function that defines the sort order
+ * arr.sort([comp])
+ * @param {function} comp - Specifies a function that defines the sort order
+ * @param {boolean} up - default up order
  * @result {array} arr - The sorted array
  */
-export default function Bubble(compareFunction) {
+export default function bubble(comp, up = true) {
   let arr = this,
     ordered = false, //false表示还处于无序,需要继续迭代; true表示有序
     i = arr.length - 1,
@@ -20,16 +21,22 @@ export default function Bubble(compareFunction) {
     //每次循环开始认为是有序的
     ordered = true;
     for (j = 0; j < i; ++j) {
-      temp = compareFunction(arr[j], arr[j+1]);
-      if (temp > 0) {
-        tempItem = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = tempItem;
-        ordered = false;
-      }else if(temp > 0){
-
+      temp = comp(arr[j], arr[j + 1]);
+      // up order
+      if(up){
+        if (temp > 0) {
+          tempItem = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = tempItem;
+          ordered = false;
+        }
       }else{
-
+        if (temp < 0) {
+          tempItem = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = tempItem;
+          ordered = false;
+        }
       }
     }
   }

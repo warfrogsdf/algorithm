@@ -3,54 +3,43 @@
  * 插入排序
  */
 
-import binarySearch from '../search/binarySearch'
+// import binarySearch from '../search/binarySearch'
 
 /**
- * insert sorting
- * arr.sort([compareFunction])
- * @param {function} compareFunction - Specifies a function that defines the sort order
+ * binary insert sorting
+ * arr.sort([comp])
+ * @param {function} comp - Specifies a function that defines the sort order
+ * @param {boolean} up - default up order
  * @result {array} arr - The sorted array
  */
 
-export default function Insert(compareFunction) {
+export default function insert(comp, up = true) {
   let arr = this,
     len = arr.length,
-    start,
-    end, k,
+    left,
+    right,
+    i,
+    j,
     tempItem,
     temp,
     mid;
   for (i = 1; i < len; ++i) {
     tempItem = arr[i];
-    start = 0;
-    end = i - 1;
-    while (start <= end) {
-      mid = Math.floor((i+j)/2);
-      temp = compareFunction(tempItem, arr[mid]);
-      if (temp > 0) {
-        start = mid + 1;
+    left = 0;
+    right = i - 1;
+    while (left <= right) {
+      mid = Math.floor((left + right) / 2);
+      temp = comp(tempItem, arr[mid]);
+      if (temp < 0) {
+        right = mid - 1;
       } else {
-        end = mid - 1;
+        left = mid + 1;
       }
     }
-  }
-  return arr;
-
-  for (var i = 1; i < arr.length; i++) {
-    var temp = arr[i];
-    var low = 0, high = i - 1;
-    var mid = -1;
-    while (low <= high) {
-      mid = low + (high - low) / 2;
-      if (arr[mid] > temp) {
-        high = mid - 1;
-      } else { // 元素相同时，也插入在后面的位置                
-        low = mid + 1;
-      }
-    }
-    for(var j = i - 1; j >= low; j--) {
+    for (j = i - 1; j >= left; --j) {
       arr[j + 1] = arr[j];
     }
-    arr[low] = temp;
+    arr[left] = tempItem;
   }
+  return arr;
 };

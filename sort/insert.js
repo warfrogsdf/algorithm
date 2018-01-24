@@ -9,13 +9,14 @@
  * binary insert sorting
  * arr.sort([comp])
  * @param {function} comp - Specifies a function that defines the sort order
- * @param {boolean} up - default up order
+ * @param {number} start - default 0
+ * @param {number} end - default arr.length
  * @result {array} arr - The sorted array
  */
 
-export default function insert(comp, up = true) {
+export default function insert(comp, start = 0, end) {
   let arr = this,
-    len = arr.length,
+    len = end || arr.length,
     left,
     right,
     i,
@@ -23,9 +24,9 @@ export default function insert(comp, up = true) {
     tempItem,
     temp,
     mid;
-  for (i = 1; i < len; ++i) {
+  for (i = start + 1; i < len; ++i) {
     tempItem = arr[i];
-    left = 0;
+    left = start;
     right = i - 1;
     while (left <= right) {
       mid = Math.floor((left + right) / 2);

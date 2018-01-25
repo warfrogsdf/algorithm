@@ -1,6 +1,5 @@
 /**
- * Created by lib7311 on 2016/10/24.
- * 堆排序
+ * head structure
  */
 function swap(arr, i, j) {
   let tmp = arr[i];
@@ -36,12 +35,47 @@ function heapAdjust(arr, nodeIndex, len, comp) {
   }
 }
 
-function buildMaxHeap(arr, comp) {
+// 建立一个空堆；
+function build(arr, comp){
   let i;
   let len = arr.length;
   for (i = Math.floor(len / 2) - 1; i >= 0; i--) {
     heapAdjust(arr, i, len, comp);
   }
+}
+
+// 向堆中插入一个新元素；
+function insert(arr, item) {
+
+}
+
+// 将新元素提升使其符合堆的性质；
+function update() {
+
+}
+
+// 获取当前堆顶元素的值；
+function get() {
+
+}
+
+// 删除堆顶元素；
+function del() {
+
+}
+
+// 使删除堆顶元素的堆再次成为堆。
+function heapify(){
+
+}
+
+export default {
+  build,
+  insert,
+  update,
+  get,
+  delete: del,
+  heapify
 }
 
 export default function heap(comp) {

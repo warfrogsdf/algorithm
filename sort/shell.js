@@ -12,9 +12,9 @@ function shellInsertSort(arr, gap, comp) {
     tempItem;
   for (i = 0; i < gap; ++i) {
     for (j = i + gap; j < len; j += gap) {
-      if (comp(arr[j],  arr[i]) < 0) {
+      if (comp(arr[j],  arr[j-gap]) < 0) {
         tempItem = arr[j];
-        k = i;
+        k = j - gap;
         while (k >= 0 && comp(arr[k], tempItem) > 0) {
           arr[k + gap] = arr[k];
           k -= gap;
@@ -23,7 +23,7 @@ function shellInsertSort(arr, gap, comp) {
       }
     }
   }
-}
+};
 
 
 export default function Shell(comp) {

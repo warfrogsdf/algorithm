@@ -27,20 +27,22 @@ export default function insert(comp, start = 0, end) {
   for (i = start + 1; i < len; ++i) {
     tempItem = arr[i];
     left = start;
-    right = i - 1;
-    while (left <= right) {
-      mid = Math.floor((left + right) / 2);
-      temp = comp(tempItem, arr[mid]);
-      if (temp < 0) {
-        right = mid - 1;
-      } else {
-        left = mid + 1;
+    if(comp(tempItem, arr[i-1]) < 0){
+      right = i - 1;
+      while (left <= right) {
+        mid = Math.floor((left + right) / 2);
+        temp = comp(tempItem, arr[mid]);
+        if (temp < 0) {
+          right = mid - 1;
+        } else {
+          left = mid + 1;
+        }
       }
+      for (j = i - 1; j >= left; --j) {
+        arr[j + 1] = arr[j];
+      }
+      arr[left] = tempItem;
     }
-    for (j = i - 1; j >= left; --j) {
-      arr[j + 1] = arr[j];
-    }
-    arr[left] = tempItem;
   }
   return arr;
 };

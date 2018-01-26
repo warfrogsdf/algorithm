@@ -12,26 +12,26 @@ function heapAdjust(arr, nodeIndex, len, comp) {
   len = len || arr.length;
   let stack = [nodeIndex];
   let i;
-  let largest;
+  let edge;
   let left;
   let right;
   while (stack.length) {
     i = stack.pop();
-    largest = i;
+    edge = i;
     left = 2 * i + 1;
     right = 2 * i + 2;
 
-    if (left < len && comp(arr[largest], arr[left]) < 0) {
-      largest = left;
+    if (left < len && comp(arr[edge], arr[left]) < 0) {
+      edge = left;
     }
 
-    if (right < len && comp(arr[largest], arr[right]) < 0) {
-      largest = right;
+    if (right < len && comp(arr[edge], arr[right]) < 0) {
+      edge = right;
     }
 
-    if (largest !== i) {
-      swap(arr, i, largest);
-      stack.push(largest);
+    if (edge !== i) {
+      swap(arr, i, edge);
+      stack.push(edge);
     }
   }
 }

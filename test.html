@@ -6,64 +6,59 @@
 </head>
 <body>
 <script type="text/javascript">
-  function swap(arr, i, j) {
-    let tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
-  }
-
-  function buildMaxHeap(arr, comp) {
-    let i;
-    let len = arr.length;
-    for (i = Math.floor(len / 2) - 1; i >= 0; i--) {
-      heapAdjust(arr, i, len, comp);
-    }
-  }
-
-  function heapAdjust(arr, nodeIndex, len, comp) {
-    len = len || arr.length;
-    let stack = [nodeIndex];
-    let i;
-    let largest;
-    let left;
-    let right;
-    while (stack.length) {
-      i = stack.pop();
-      largest = i;
-      left = 2 * i + 1;
-      right = 2 * i + 2;
-
-      if (left < len && comp(arr[largest], arr[left]) < 0) {
-        largest = left;
-      }
-
-      if (right < len && comp(arr[largest], arr[right]) < 0) {
-        largest = right;
-      }
-
-      if (largest !== i) {
-        swap(arr, i, largest);
-        stack.push(largest);
+  function insert(comp, start = 0, end) {
+    let arr = this,
+      len = end || arr.length,
+      left,
+      right,
+      i,
+      j,
+      tempItem,
+      temp,
+      mid;
+    for (i = start + 1; i < len; ++i) {
+      tempItem = arr[i];
+      left = start;
+      if(comp(tempItem, arr[i-1]) < 0){
+        right = i - 1;
+        while (left <= right) {
+          mid = Math.floor((left + right) / 2);
+          temp = comp(tempItem, arr[mid]);
+          if (temp < 0) {
+            right = mid - 1;
+          } else {
+            left = mid + 1;
+          }
+        }
+        for (j = i - 1; j >= left; --j) {
+          arr[j + 1] = arr[j];
+        }
+        arr[left] = tempItem;
       }
     }
-  }
-
-  function heap(comp) {
-    let arr = this;
-    let len = arr.length;
-    buildMaxHeap(arr, comp);
-    for (let i = len - 1; i > 0; i--) {
-      swap(arr, 0, i);
-      heapAdjust(arr, 0, i, comp);
-    }
-
     return arr;
-  }
+  };
+
+  function merge(arr, comp) {
+    let len = arr.length,
+      i,
+      j,
+      _len = Math.pow(2, Math.ceil(Math.log2(len)));
+    for(i = 2; i <= _len; i = i << 1){
+      for(j = 0; j < len; j += i){
+        insert.call(arr, comp, j, Math.min(j + i, len));
+      }
+    }
+    return arr;
+  };
 
   var z = [0,1,3,3,3,3,3,3,3,999,-10,4,5,6,7,9]
   //var z = [1, 999, -10, 7, 9]
-  var r = heap.call(z, function (a, b) {
+  /*var r = merge.call(z, function (a, b) {
     return -(a - b)
+  })*/
+  var r = merge(z, function (a, b) {
+    return b - a
   })
   console.log(r)
 </script>

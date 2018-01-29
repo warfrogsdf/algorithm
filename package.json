@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "scripts": {
+    "build": "webpack",
     "test": "node ./test/testPreOrderTraversal.js"
   },
   "repository": {
@@ -25,6 +26,11 @@
   },
   "homepage": "https://github.com/warfrogsdf/algorithm#readme",
   "devDependencies": {
-    "jest": "^22.1.4"
+    "jest": "^22.1.4",
+    "webpack": "^3.10.0",
+    "babel-cli": "^6.9.0",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.9.0"
   }
 }

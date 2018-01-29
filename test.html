@@ -37,7 +37,7 @@
 
   bucket.reset = function () {
     let i = 0;
-    for (; i < 20; ++i){
+    for (; i < 20; ++i) {
       this[i] = [];
     }
   };
@@ -63,16 +63,29 @@
     }
 
     // 基数排序正数部分
-    for (i = 0; i < positiveNum; ++i) {
+    for (i = 0; i < negativeNum + positiveNum; ++i) {
       for (j = 0; j < len; ++j) {
         // 一次获取i位上的数字，然后插入对象桶
         number = getNumber(arr, j);
-        index = ~~(~~(~~number/Math.pow(10, i)) % 10);
-        if(number > 0){
-          bucket[index + 10].push(arr[j]);
-        }else{
-          bucket[9 + index].push(arr[j]);
+        if (i < negativeNum) {
+          // 处理负数部分
+          tmp = number.toString().split('.')[1];
+          if (!tmp || !tmp[negativeNum - 1 - i]) {
+            index = 0;
+          } else {
+            index = Number(tmp[negativeNum - 1 - i]);
+          }
+        } else {
+          // 处理正数部分
+          index = ~~(~~(~~number / Math.pow(10, i - negativeNum)) % 10);
         }
+        //console.log(index)
+        if (comp(0, number) < 0) {
+          bucket[Math.abs(index) + 10].push(arr[j]);
+        } else {
+          bucket[9 - Math.abs(index)].push(arr[j]);
+        }
+        //console.log(index)
       }
       arr.length = 0;
       arr = Array.prototype.concat.apply(arr, bucket);
@@ -86,13 +99,13 @@
     return arr;
   };
 
-  var z = [0,1,3,3,3,3,3,3,3,999,-10,4,5,6,7,9]
+  var z = [0, 1, 3, 3, -3.23213, 3124.2123, 3.1, 3, 3, 999, -10, 4, 5, 6, 7, 9]
   //var z = [1, 999, -10, 7, 9]
   /*var r = merge.call(z, function (a, b) {
     return -(a - b)
   })*/
   var r = radix(z, function (a, b) {
-    return a - b
+    return b - a
   }, function (arr, i) {
     return arr[i];
   });
